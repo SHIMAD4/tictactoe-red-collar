@@ -1,5 +1,92 @@
+$main-fz: 16px;
+$alt-fz: 24px;
+$text-clr: #ffffff;
+$accent-clr: #cc0605;
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: black;
+    overflow-y: hidden;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 130px);
+}
+
+ul {
+    list-style-type: none;
+}
+
+a {
+    color: $text-clr;
+    text-decoration: none;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto;
+}
+
+// Header
+.header {
+    padding: 18px 0px;
+    background-color: $accent-clr;
+    border-radius: 0px 0px 16px 16px;
+    &__desctiption {
+        color: $text-clr;
+        font-size: $alt-fz;
+        font-weight: 700;
+        text-transform: uppercase;
+        text-align: center;
+    }
+}
+
+// Game Block
+.game-block {
+    width: 290px;
+    height: 290px;
+    // opacity: .4;
+    &__list {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+        border-radius: 16px;
+        overflow: hidden;
+        &-item {
+            background-color: $accent-clr;
+            width: 90px;
+            height: 90px;
+        }
+    }
+}
+
+// Footer
+.footer {
+    padding: 18px 0px;
+    background-color: $accent-clr;
+    border-radius: 16px 16px 0px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &__description {
+        color: $text-clr;
+        font-size: $alt-fz;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
 }

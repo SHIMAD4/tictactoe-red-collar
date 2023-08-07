@@ -3,3 +3,81 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: black;
+  overflow-y: hidden;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 130px);
+}
+
+ul {
+  list-style-type: none;
+}
+
+a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.header {
+  padding: 18px 0px;
+  background-color: #cc0605;
+  border-radius: 0px 0px 16px 16px;
+}
+.header__desctiption {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.game-block {
+  width: 290px;
+  height: 290px;
+}
+.game-block__list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.game-block__list-item {
+  background-color: #cc0605;
+  width: 90px;
+  height: 90px;
+}
+
+.footer {
+  padding: 18px 0px;
+  background-color: #cc0605;
+  border-radius: 16px 16px 0px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer__description {
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
