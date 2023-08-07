@@ -9,11 +9,11 @@ $accent-clr: #cc0605;
     box-sizing: border-box;
 }
 
-html, body {
-    height: 100%;
-}
-
 body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     font-family: 'Roboto', sans-serif;
     background-color: black;
     overflow-y: hidden;
@@ -23,7 +23,6 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: calc(100vh - 130px);
 }
 
 ul {
