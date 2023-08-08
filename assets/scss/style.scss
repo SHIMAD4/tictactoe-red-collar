@@ -157,9 +157,31 @@ main {
     top: 50%;
     margin-top: -10%;
 }
-.game-block__player-name {
-    color: $text-clr;
-    margin-bottom: 90px;
+.show-winner {
+    margin-bottom: 30px;
+    pointer-events: none;
+    &__text {
+        opacity: 0;
+        color: $text-clr;
+    }
+    .active {
+        pointer-events: auto;
+        opacity: 1;
+    }
+}
+.retry-block {
+    margin-top: 30px;
+    pointer-events: none;
+    &__btn {
+        opacity: 0;
+        padding: 20px 40px;
+        background-color: $accent-clr;
+        border-radius: 16px;
+    }
+    .active {
+        pointer-events: auto;
+        opacity: 1;
+    }
 }
 
 // Footer

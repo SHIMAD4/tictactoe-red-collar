@@ -155,9 +155,32 @@ main {
   margin-top: -10%;
 }
 
-.game-block__player-name {
+.show-winner {
+  margin-bottom: 30px;
+  pointer-events: none;
+}
+.show-winner__text {
+  opacity: 0;
   color: #ffffff;
-  margin-bottom: 90px;
+}
+.show-winner .active {
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.retry-block {
+  margin-top: 30px;
+  pointer-events: none;
+}
+.retry-block__btn {
+  opacity: 0;
+  padding: 20px 40px;
+  background-color: #cc0605;
+  border-radius: 16px;
+}
+.retry-block .active {
+  pointer-events: auto;
+  opacity: 1;
 }
 
 .footer {

@@ -1,11 +1,11 @@
 // Сделать мини-игру Крестики-нолики
 
 // 1. Есть возможность ввести имена пользователей и выбрать, кто начинает первым
-// 2. Сделать поле 3х3 клетки, просчитать возможные комбинации для выигрышных ходов игроков
-// 3. По окончанию игры выводить сообщение о победителе
 
 let board = document.querySelector('.game-block')
 let blocks = document.querySelectorAll('.game-block__list-item')
+let showWinnerBlock = document.querySelector('.show-winner__text')
+let retryButton = document.querySelector('.retry-block__btn')
 
 let firstStep = 0
 
@@ -41,7 +41,7 @@ function createCircle(id) {
 function createCross(id) {
     let cross = document.createElement('div')
     cross.classList.add('cross')
-    blocks[id].append(cross)
+    blocks[id].appendChild(cross)
     return
 }
 
@@ -54,17 +54,29 @@ function checkWinPos() {
     winPos.forEach(arr => {
         let circleWins = arr.every(cell => blocks[cell].firstChild?.classList.contains('circle'))
         if(circleWins) {
-            console.log('Circle Wins')
             blocks.forEach(block => block.replaceWith(block.cloneNode(true)))
+            showWinner('Circle Wins')
             return
         }
     })
     winPos.forEach(arr => {
         let crossWins = arr.every(cell => blocks[cell].firstChild?.classList.contains('cross'))
         if(crossWins) {
-            console.log('Cross Wins')
             blocks.forEach(block => block.replaceWith(block.cloneNode(true)))
+            showWinner('Cross Wins')
             return
         }
     })
+}
+
+function showWinner(str) {
+    showWinnerBlock.classList.add('active')
+    retryButton.classList.add('active')
+    showWinnerBlock.innerText = `${str}`
+}
+
+retryButton.addEventListener('click', retryMatch)
+
+function retryMatch() {
+    location.reload()
 }
