@@ -41,6 +41,7 @@ button:active {
 
 main {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   flex: 1 1 auto;
@@ -102,12 +103,57 @@ main {
   width: 90px;
   height: 90px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .game-block__list-item:hover {
   background-color: #990000;
 }
 .game-block__list-item:active {
   background-color: #760000;
+}
+
+.circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 10px solid white;
+}
+
+.cross {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: rotate(45deg);
+}
+
+.cross::before, .cross::after {
+  content: "";
+  position: absolute;
+  background-color: white;
+}
+
+.cross::before {
+  width: 20%;
+  height: 100%;
+  left: 50%;
+  margin-left: -10%;
+}
+
+.cross::after {
+  width: 100%;
+  height: 20%;
+  top: 50%;
+  margin-top: -10%;
+}
+
+.game-block__player-name {
+  color: #ffffff;
+  margin-bottom: 90px;
 }
 
 .footer {
