@@ -11,13 +11,8 @@ html, body {
 body {
   font-family: "Roboto", sans-serif;
   background-color: black;
-}
-
-main {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: calc(100vh - 131px);
+  flex-direction: column;
 }
 
 ul {
@@ -27,6 +22,38 @@ ul {
 a {
   color: #ffffff;
   text-decoration: none;
+}
+
+button {
+  border: none;
+  background-color: transparent;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #990000;
+}
+button:active {
+  background-color: #760000;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1 1 auto;
+}
+
+::-moz-selection {
+  background-color: black;
+  color: #cc0605;
+}
+
+::selection {
+  background-color: black;
+  color: #cc0605;
 }
 
 .wrapper {
@@ -40,12 +67,22 @@ a {
   background-color: #cc0605;
   border-radius: 0px 0px 16px 16px;
 }
+.header__wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.header__button {
+  padding: 10px;
+  border-radius: 16px;
+}
 .header__desctiption {
   color: #ffffff;
   font-size: 24px;
   font-weight: 700;
   text-transform: uppercase;
   text-align: center;
+  margin: 0px 30px;
 }
 
 .game-block {
@@ -64,6 +101,13 @@ a {
   background-color: #cc0605;
   width: 90px;
   height: 90px;
+  cursor: pointer;
+}
+.game-block__list-item:hover {
+  background-color: #990000;
+}
+.game-block__list-item:active {
+  background-color: #760000;
 }
 
 .footer {
@@ -79,4 +123,21 @@ a {
   font-size: 24px;
   font-weight: 700;
   text-transform: uppercase;
+}
+
+@media (min-width: 1024px) {
+  .wrapper {
+    max-width: 920px;
+  }
+  .header__button {
+    padding: 20px;
+  }
+  .game-block {
+    width: 380px;
+    height: 380px;
+  }
+  .game-block__list-item {
+    width: 120px;
+    height: 120px;
+  }
 }

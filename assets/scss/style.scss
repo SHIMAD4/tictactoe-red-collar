@@ -2,6 +2,8 @@ $main-fz: 16px;
 $alt-fz: 24px;
 $text-clr: #ffffff;
 $accent-clr: #cc0605;
+$hover-clr: #990000;
+$active-clr: #760000;
 
 * {
     margin: 0;
@@ -16,13 +18,8 @@ html, body {
 body {
     font-family: 'Roboto', sans-serif;
     background-color: black;
-}
-
-main {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: calc(100vh - 131px);
+    flex-direction: column;
 }
 
 ul {
@@ -32,6 +29,33 @@ ul {
 a {
     color: $text-clr;
     text-decoration: none;
+}
+
+button {
+    border: none;
+    background-color: transparent;
+    color: $text-clr;
+    font-size: $main-fz;
+    font-weight: 700;
+    cursor: pointer;
+    &:hover {
+        background-color: $hover-clr;
+    }
+    &:active {
+        background-color: $active-clr;
+    }
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1 1 auto;
+}
+
+::selection {
+    background-color: black;
+    color: $accent-clr;
 }
 
 .wrapper {
@@ -45,12 +69,22 @@ a {
     padding: 18px 0px;
     background-color: $accent-clr;
     border-radius: 0px 0px 16px 16px;
+    &__wrapper {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+    }
+    &__button {
+        padding: 10px;
+        border-radius: 16px;
+    }
     &__desctiption {
         color: $text-clr;
         font-size: $alt-fz;
         font-weight: 700;
         text-transform: uppercase;
         text-align: center;
+        margin: 0px 30px;
     }
 }
 
@@ -58,7 +92,6 @@ a {
 .game-block {
     width: 290px;
     height: 290px;
-    // opacity: .4;
     &__list {
         display: flex;
         flex-direction: row;
@@ -70,6 +103,13 @@ a {
             background-color: $accent-clr;
             width: 90px;
             height: 90px;
+            cursor: pointer;
+            &:hover {
+                background-color: $hover-clr;
+            }
+            &:active {
+                background-color: $active-clr;
+            }
         }
     }
 }
@@ -87,5 +127,26 @@ a {
         font-size: $alt-fz;
         font-weight: 700;
         text-transform: uppercase;
+    }
+}
+
+@media (min-width: 1024px) {
+    .wrapper {
+        max-width: 920px;
+    }
+    .header {
+        &__button {
+            padding: 20px;
+        }
+    }
+    .game-block {
+        width: 380px;
+        height: 380px;
+        &__list {
+            &-item {
+                width: 120px;
+                height: 120px;
+            }
+        }
     }
 }
