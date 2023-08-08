@@ -89,6 +89,10 @@ main {
 .game-block {
   width: 290px;
   height: 290px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 .game-block__list {
   display: flex;
@@ -107,10 +111,10 @@ main {
   justify-content: center;
   align-items: center;
 }
-.game-block__list-item:hover {
+.game-block__list .state:hover {
   background-color: #990000;
 }
-.game-block__list-item:active {
+.game-block__list .state:active {
   background-color: #760000;
 }
 
