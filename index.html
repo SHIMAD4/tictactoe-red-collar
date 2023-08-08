@@ -16,30 +16,24 @@
 <body>
     <header class="header">
         <div class="header__wrapper wrapper">
-            <button class="header__button">Player 1</button>
+            <button class="header__button" id="first">Player 1</button>
             <p class="header__desctiption">Tic Tac Toe</p>
-            <button class="header__button">Player 2</button>
+            <button class="header__button" id="second">Player 2</button>
         </div>
     </header>
     <main>
         <section class="show-winner">
             <h1 class="show-winner__text">Circle Wins</h1>
         </section>
-        <!-- <section class="game-block">
-            <ul class="game-block__list">
-                <li class="game-block__list-item state" id="0"></li>
-                <li class="game-block__list-item state" id="1"></li>
-                <li class="game-block__list-item state" id="2"></li>
-                <li class="game-block__list-item state" id="3"></li>
-                <li class="game-block__list-item state" id="4"></li>
-                <li class="game-block__list-item state" id="5"></li>
-                <li class="game-block__list-item state" id="6"></li>
-                <li class="game-block__list-item state" id="7"></li>
-                <li class="game-block__list-item state" id="8"></li>
-            </ul>
-        </section> -->
         <section class="retry-block">
             <button class="retry-block__btn">Retry</button>
+        </section>
+        <section class="modal">
+            <div class="modal__window">
+                <h2 class="modal__window__heading" >Изменить имя</h2>
+                <input  class="modal__window__input" type="text" placeholder="Введите имя...">
+                <button  class="modal__window__button" type="button">Сохранить</button>
+            </div>
         </section>
     </main>
     <footer class="footer">

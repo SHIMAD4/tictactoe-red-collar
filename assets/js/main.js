@@ -2,10 +2,53 @@
 
 // 1. Есть возможность ввести имена пользователей и выбрать, кто начинает первым
 
+const firstPlayerButton = document.getElementById('first')
+const secondPlayerButton = document.getElementById('second')
 let showWinnerBlock = document.querySelector('.show-winner__text')
 let retryButton = document.querySelector('.retry-block__btn')
+let modal = document.querySelector('.modal')
+let modalInput = document.querySelector('.modal__window__input')
+let modalButton = document.querySelector('.modal__window__button')
+let activePlayer = null
+let activePlayerButton = null
+let activePlayerKey = ''
 
 let firstStep = 0
+
+let firstPlayer = {'name': 'Player 1',}
+let secondPlayer = {'name': 'Player 2',}
+
+firstPlayerButton.addEventListener('click', () => openModal(firstPlayer))
+secondPlayerButton.addEventListener('click', () => openModal(secondPlayer))
+
+modalButton.addEventListener('click', () => {
+    modal.classList.remove('active')
+})
+
+function savePlayerName() {
+    const newName = modalInput.value
+
+    if (activePlayer) {
+        activePlayer.name = newName
+        localStorage.setItem(activePlayerKey, newName)
+        activePlayerButton.innerText = newName
+    }
+
+    modalInput.value = ''
+    modal.classList.remove('active')
+}
+
+modalButton.addEventListener('click', savePlayerName)
+
+function openModal(player) {
+    activePlayer = player
+    activePlayerButton = event.currentTarget
+    activePlayerKey = (player === firstPlayer) ? 'firstPlayerName' : 'secondPlayerName'
+    
+    modalInput.value = player.name
+    modal.classList.add('active')
+}
+
 
 function checkStep(e) {
     switch (firstStep) {
@@ -59,26 +102,27 @@ function createCross(id) {
 
 function checkWinPos() {
     let blocks = document.querySelectorAll('.game-block__list-item')
+    let allCellsOccupied = true
+
     const winPos = [
         [0, 1, 2], [3, 4, 5], [6, 7, 8], // Horizontal 
         [0, 3, 6], [1, 4, 7], [2, 5, 8], // Vertical
         [0, 4, 8], [2, 4, 6]             // Diagonal
     ]
 
-    let allCellsOccupied = true
-
     winPos.forEach(arr => {
         let circleWins = arr.every(cell => blocks[cell].firstChild?.classList.contains('circle'))
+        let crossWins = arr.every(cell => blocks[cell].firstChild?.classList.contains('cross'))
+
         if(circleWins) {
             blocks.forEach(block => block.replaceWith(block.cloneNode(true)))
-            showWinner('Circle Wins')
+            showWinner(`${firstPlayer.name}` + ' wins!')
             return
         }
 
-        let crossWins = arr.every(cell => blocks[cell].firstChild?.classList.contains('cross'))
         if(crossWins) {
             blocks.forEach(block => block.replaceWith(block.cloneNode(true)))
-            showWinner('Cross Wins')
+            showWinner(`${secondPlayer.name}` + ' wins!')
             return
         }
     
@@ -104,6 +148,7 @@ function retryMatch() {
     let board = document.querySelector('.game-block')
     showWinnerBlock.classList.remove('active')
     retryButton.classList.remove('active')
+    firstStep = 0
     board.remove()
     createBoard()
 }
