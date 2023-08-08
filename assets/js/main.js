@@ -2,16 +2,10 @@
 
 // 1. Есть возможность ввести имена пользователей и выбрать, кто начинает первым
 
-let board = document.querySelector('.game-block')
-let blocks = document.querySelectorAll('.game-block__list-item')
 let showWinnerBlock = document.querySelector('.show-winner__text')
 let retryButton = document.querySelector('.retry-block__btn')
 
 let firstStep = 0
-
-blocks.forEach(block => {
-    block.addEventListener('click', checkStep)
-})
 
 function checkStep(e) {
     switch (firstStep) {
@@ -31,14 +25,32 @@ function checkStep(e) {
     checkWinPos()
 }
 
+function createBoard() {
+    let section = document.createElement('section')
+    let ul = document.createElement('ul')
+    section.classList.add('game-block')
+    ul.classList.add('game-block__list')
+    for(let i = 0; i < 9; i++) {
+        let li = document.createElement('li')
+        li.classList.add('game-block__list-item')
+        li.setAttribute('id', i)
+        ul.appendChild(li)
+        li.addEventListener('click', checkStep)
+    }
+    section.appendChild(ul)
+    document.querySelector('main').insertBefore(section, document.querySelector('.retry-block'))
+}
+
 function createCircle(id) {
+    let blocks = document.querySelectorAll('.game-block__list-item')
     let circle = document.createElement('div')
     circle.classList.add('circle')
-    blocks[id].append(circle)
+    blocks[id].appendChild(circle)
     return
 }
 
 function createCross(id) {
+    let blocks = document.querySelectorAll('.game-block__list-item')
     let cross = document.createElement('div')
     cross.classList.add('cross')
     blocks[id].appendChild(cross)
@@ -46,6 +58,7 @@ function createCross(id) {
 }
 
 function checkWinPos() {
+    let blocks = document.querySelectorAll('.game-block__list-item')
     const winPos = [
         [0, 1, 2], [3, 4, 5], [6, 7, 8], // Horizontal 
         [0, 3, 6], [1, 4, 7], [2, 5, 8], // Vertical
@@ -76,7 +89,12 @@ function showWinner(str) {
 }
 
 retryButton.addEventListener('click', retryMatch)
-
 function retryMatch() {
-    location.reload()
+    let board = document.querySelector('.game-block')
+    showWinnerBlock.classList.remove('active')
+    retryButton.classList.remove('active')
+    board.remove()
+    createBoard()
 }
+
+createBoard()
