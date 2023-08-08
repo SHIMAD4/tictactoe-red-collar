@@ -64,6 +64,9 @@ function checkWinPos() {
         [0, 3, 6], [1, 4, 7], [2, 5, 8], // Vertical
         [0, 4, 8], [2, 4, 6]             // Diagonal
     ]
+
+    let allCellsOccupied = true
+
     winPos.forEach(arr => {
         let circleWins = arr.every(cell => blocks[cell].firstChild?.classList.contains('circle'))
         if(circleWins) {
@@ -71,15 +74,23 @@ function checkWinPos() {
             showWinner('Circle Wins')
             return
         }
-    })
-    winPos.forEach(arr => {
+
         let crossWins = arr.every(cell => blocks[cell].firstChild?.classList.contains('cross'))
         if(crossWins) {
             blocks.forEach(block => block.replaceWith(block.cloneNode(true)))
             showWinner('Cross Wins')
             return
         }
+    
+        if (arr.some(cell => !blocks[cell].firstChild)) {
+            allCellsOccupied = false
+        }
     })
+
+    if (allCellsOccupied) {
+        blocks.forEach(block => block.replaceWith(block.cloneNode(true)))
+        showWinner('It\'s a Draw')
+    }
 }
 
 function showWinner(str) {
