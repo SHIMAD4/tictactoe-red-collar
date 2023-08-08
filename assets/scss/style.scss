@@ -185,7 +185,7 @@ main {
 }
 
 // Modal
-.modal {
+.modal, .modal-toss {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
@@ -224,7 +224,7 @@ main {
         }
     }
 }
-.modal.active {
+.modal.active, .modal-toss.active {
     display: flex;
     justify-content: center;
     align-items: center;

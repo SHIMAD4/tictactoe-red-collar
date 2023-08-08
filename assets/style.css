@@ -183,7 +183,7 @@ main {
   opacity: 1;
 }
 
-.modal {
+.modal, .modal-toss {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.7);
@@ -192,7 +192,7 @@ main {
   left: 0;
   display: none;
 }
-.modal__window {
+.modal__window, .modal-toss__window {
   width: -moz-fit-content;
   width: fit-content;
   background-color: #cc0605;
@@ -203,11 +203,11 @@ main {
   align-items: center;
   padding: 30px;
 }
-.modal__window__heading {
+.modal__window__heading, .modal-toss__window__heading {
   color: #ffffff;
   margin-bottom: 50px;
 }
-.modal__window__input {
+.modal__window__input, .modal-toss__window__input {
   background-color: transparent;
   border: none;
   outline: none;
@@ -216,18 +216,18 @@ main {
   padding: 10px 30px;
   margin-bottom: 20px;
 }
-.modal__window__input::-moz-placeholder {
+.modal__window__input::-moz-placeholder, .modal-toss__window__input::-moz-placeholder {
   color: black;
 }
-.modal__window__input::placeholder {
+.modal__window__input::placeholder, .modal-toss__window__input::placeholder {
   color: black;
 }
-.modal__window__button {
+.modal__window__button, .modal-toss__window__button {
   padding: 20px 30px;
   border-radius: 16px;
 }
 
-.modal.active {
+.modal.active, .modal-toss.active {
   display: flex;
   justify-content: center;
   align-items: center;

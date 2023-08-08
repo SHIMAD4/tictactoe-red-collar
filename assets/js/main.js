@@ -1,42 +1,54 @@
-// Сделать мини-игру Крестики-нолики
+const firstPlayerButton = document.getElementById('first'),
+      secondPlayerButton = document.getElementById('second')
 
-// 1. Есть возможность ввести имена пользователей и выбрать, кто начинает первым
+let showWinnerBlock = document.querySelector('.show-winner__text'), 
+    retryButton = document.querySelector('.retry-block__btn'), 
+    modal = document.querySelector('.modal'), 
+    modalInput = document.querySelector('.modal__window__input'), 
+    modalButton = document.querySelector('.modal__window__button'),
+    modalToss = document.querySelector('.modal-toss'), 
+    modalInputToss = document.querySelectorAll('.modal-toss__window__radio'), 
+    modalButtonToss = document.querySelector('.modal-toss__window__button'), 
+    activePlayer = null, 
+    activePlayerButton = null, 
+    activePlayerKey = ''
 
-const firstPlayerButton = document.getElementById('first')
-const secondPlayerButton = document.getElementById('second')
-let showWinnerBlock = document.querySelector('.show-winner__text')
-let retryButton = document.querySelector('.retry-block__btn')
-let modal = document.querySelector('.modal')
-let modalInput = document.querySelector('.modal__window__input')
-let modalButton = document.querySelector('.modal__window__button')
-let activePlayer = null
-let activePlayerButton = null
-let activePlayerKey = ''
-
+const firstPlayerRadio = document.getElementById('firstPlayerRadio')
+const secondPlayerRadio = document.getElementById('secondPlayerRadio')
 let firstStep = 0
 
 let firstPlayer = {'name': 'Player 1',}
 let secondPlayer = {'name': 'Player 2',}
+const players = [firstPlayer, secondPlayer]
+
+let currentPlayerIndex = firstStep
+
+window.addEventListener("load", () => {
+    document.querySelector('.modal-toss').classList.add('active')
+})
 
 firstPlayerButton.addEventListener('click', () => openModal(firstPlayer))
+firstPlayerButton.innerText = localStorage.getItem('firstPlayerName') ? localStorage.getItem('firstPlayerName') : 'Player 1'
+
 secondPlayerButton.addEventListener('click', () => openModal(secondPlayer))
+secondPlayerButton.innerText = localStorage.getItem('secondPlayerName') ? localStorage.getItem('secondPlayerName') : 'Player 2'
 
 modalButton.addEventListener('click', () => {
     modal.classList.remove('active')
 })
+modalButtonToss.addEventListener('click', () => {
+    modalToss.classList.remove('active')
+})
 
-function savePlayerName() {
-    const newName = modalInput.value
+firstPlayerRadio.addEventListener('click', () => {
+    currentPlayerIndex = 0
+    modalToss.classList.remove('active')
+})
 
-    if (activePlayer) {
-        activePlayer.name = newName
-        localStorage.setItem(activePlayerKey, newName)
-        activePlayerButton.innerText = newName
-    }
-
-    modalInput.value = ''
-    modal.classList.remove('active')
-}
+secondPlayerRadio.addEventListener('click', () => {
+    currentPlayerIndex = 1
+    modalToss.classList.remove('active')
+})
 
 modalButton.addEventListener('click', savePlayerName)
 
@@ -49,23 +61,17 @@ function openModal(player) {
     modal.classList.add('active')
 }
 
+function savePlayerName() {
+    const newName = modalInput.value
 
-function checkStep(e) {
-    switch (firstStep) {
-        case 0:
-            createCircle(e.target.getAttribute('id'))
-            firstStep = 1
-            e.target.removeEventListener('click', checkStep)
-            e.target.classList.remove('state')
-            break
-        case 1:
-            createCross(e.target.getAttribute('id'))
-            firstStep = 0
-            e.target.removeEventListener('click', checkStep)
-            e.target.classList.remove('state')
-            break
+    if (activePlayer) {
+        activePlayer.name = newName
+        localStorage.setItem(activePlayerKey, newName)
+        activePlayerButton.innerText = newName
     }
-    checkWinPos()
+
+    modalInput.value = ''
+    modal.classList.remove('active')
 }
 
 function createBoard() {
@@ -83,7 +89,6 @@ function createBoard() {
     section.appendChild(ul)
     document.querySelector('main').insertBefore(section, document.querySelector('.retry-block'))
 }
-
 function createCircle(id) {
     let blocks = document.querySelectorAll('.game-block__list-item')
     let circle = document.createElement('div')
@@ -91,7 +96,6 @@ function createCircle(id) {
     blocks[id].appendChild(circle)
     return
 }
-
 function createCross(id) {
     let blocks = document.querySelectorAll('.game-block__list-item')
     let cross = document.createElement('div')
@@ -100,6 +104,15 @@ function createCross(id) {
     return
 }
 
+function checkStep(e) {
+    if (currentPlayerIndex === 0) {
+        createCircle(e.target.getAttribute('id'))
+    } else {
+        createCross(e.target.getAttribute('id'))
+    }
+    currentPlayerIndex = 1 - currentPlayerIndex
+    checkWinPos()
+}
 function checkWinPos() {
     let blocks = document.querySelectorAll('.game-block__list-item')
     let allCellsOccupied = true
@@ -148,9 +161,11 @@ function retryMatch() {
     let board = document.querySelector('.game-block')
     showWinnerBlock.classList.remove('active')
     retryButton.classList.remove('active')
-    firstStep = 0
+    currentPlayerIndex = (currentPlayerIndex === 0) ? 1 : 0
+    console.log(currentPlayerIndex = (currentPlayerIndex === 0) ? 1 : 0)
     board.remove()
     createBoard()
 }
+
 
 createBoard()
