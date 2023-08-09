@@ -227,6 +227,31 @@ main {
   border-radius: 16px;
 }
 
+.modal-toss form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.modal-toss form label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  padding: 10px;
+  border-radius: 16px;
+  cursor: pointer;
+}
+.modal-toss form label input {
+  margin-right: 10px;
+}
+.modal-toss form label:hover {
+  background-color: #990000;
+}
+.modal-toss form label:last-child {
+  margin-bottom: 0;
+}
+
 .modal.active, .modal-toss.active {
   display: flex;
   justify-content: center;

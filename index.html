@@ -39,18 +39,19 @@
             <div class="modal-toss__window">
                 <h2 class="modal-toss__window__heading" >Первый ход</h2>
                 <form action="">
-                    <input class="modal-toss__window__radio" type="radio" name="player" id="firstPlayerRadio">
-                    <label for="firstPlayer" class="">Первый</label>
-                    <input class="modal-toss__window__radio" type="radio" name="player" id="secondPlayerRadio">
-                    <label for="secondPlayer" class="">Второй</label>
-                    <button class="modal-toss__window__button" type="button">Сохранить</button>
-                </form>
+                    <label for="firstPlayerRadio">
+                        <input class="modal-toss__window__radio" type="radio" name="player" id="firstPlayerRadio"><span class="modal-toss__window__first">Player 1</span>
+                    </label>
+                    <label for="secondPlayerRadio">
+                        <input class="modal-toss__window__radio" type="radio" name="player" id="secondPlayerRadio"><span class="modal-toss__window__second">Player 2</span>
+                    </label>
+                </form>                
             </div>
         </section>
     </main>
     <footer class="footer">
         <p class="footer__description">RedCollar</p>
     </footer>
-    <script type="text/javascript" src="./assets/js/main.js"></script>
+    <script type="module" src="./assets/js/main.js"></script>
 </body>
 </html>
