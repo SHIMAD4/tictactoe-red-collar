@@ -1,9 +1,22 @@
+const firstPlayerRadio = document.getElementById('firstPlayerRadio')
+const secondPlayerRadio = document.getElementById('secondPlayerRadio')
+
 let showWinnerBlock = document.querySelector('.show-winner__text')
 let retryButton = document.querySelector('.retry-block__btn')
+let modalToss = document.querySelector('.modal-toss')
 
 // Инициализация переменных для хода игроков
 let firstStep = 0
 let currentPlayerIndex = firstStep
+
+firstPlayerRadio.addEventListener('click', () => {
+    currentPlayerIndex = 0                          // Установка currentPlayerIndex в 0 (индикация хода первого игрока)
+    modalToss.classList.remove('active')            // Удаление класса 'active' у элемента modalToss для его скрытия
+})
+secondPlayerRadio.addEventListener('click', () => {
+    currentPlayerIndex = 1
+    modalToss.classList.remove('active')
+})
 
 // Функция для создания игровой доски
 export function createBoard() {
@@ -104,8 +117,7 @@ function retryMatch() {
     let board = document.querySelector('.game-block')
     showWinnerBlock.classList.remove('active')
     retryButton.classList.remove('active')
-    currentPlayerIndex = (currentPlayerIndex === 0) ? 1 : 0
-    console.log(currentPlayerIndex = (currentPlayerIndex === 0) ? 1 : 0)
+    currentPlayerIndex = (currentPlayerIndex === 0) ? 0 : 1
     board.remove()
     createBoard()
 }
