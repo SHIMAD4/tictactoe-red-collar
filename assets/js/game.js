@@ -105,6 +105,7 @@ function retryMatch() {
     showWinnerBlock.classList.remove('active')
     retryButton.classList.remove('active')
     currentPlayerIndex = (currentPlayerIndex === 0) ? 1 : 0
+    console.log(currentPlayerIndex = (currentPlayerIndex === 0) ? 1 : 0)
     board.remove()
     createBoard()
 }
