@@ -58,6 +58,7 @@ function checkStep(e) {
         createShape('cross', e.target.getAttribute('id'))
     }
     currentPlayerIndex = 1 - currentPlayerIndex
+    e.target.removeEventListener('click', checkStep)
     checkWinPos()
 }
 
