@@ -67,9 +67,9 @@ main {
 
 // Header
 .header {
-    padding: 18px 0px;
+    padding: 18px 0;
     background-color: $accent-clr;
-    border-radius: 0px 0px 16px 16px;
+    border-radius: 0 0 16px 16px;
     &__wrapper {
         display: flex;
         justify-content: space-around;
@@ -85,7 +85,7 @@ main {
         font-weight: 700;
         text-transform: uppercase;
         text-align: center;
-        margin: 0px 30px;
+        margin: 0 30px;
     }
 }
 
@@ -258,9 +258,9 @@ main {
 
 // Footer
 .footer {
-    padding: 18px 0px;
+    padding: 18px 0;
     background-color: $accent-clr;
-    border-radius: 16px 16px 0px 0px;
+    border-radius: 16px 16px 0 0;
     display: flex;
     justify-content: center;
     align-items: center;

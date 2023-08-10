@@ -1,5 +1,11 @@
+import { FIRST_PLAYER, SECOND_PLAYER } from './constans.js';
+
 const firstPlayerButton = document.getElementById('first')
 const secondPlayerButton = document.getElementById('second')
+
+// Выбор элементов окна "подброса монетки"
+const modalTossFirstPlayer = document.querySelector('.modal-toss__window__first')
+const modalTossSecondPlayer = document.querySelector('.modal-toss__window__second')
 
 // Выбор элементов модального окна
 let modal = document.querySelector('.modal')
@@ -11,22 +17,15 @@ let activePlayer = null
 let activePlayerButton = null
 let activePlayerKey = ''
 
-// Выбор элементов окна "подброса монетки"
-let modalTossFirstPlayer = document.querySelector('.modal-toss__window__first')
-let modalTossSecondPlayer = document.querySelector('.modal-toss__window__second')
-
-// Инициализация объектов для игроков
-let firstPlayer = {'name': 'Player 1'}
-let secondPlayer = {'name': 'Player 2'}
-
 // Добавление слушателей события клика на кнопки игроков
-firstPlayerButton.addEventListener('click', () => openModal(firstPlayer))
-firstPlayerButton.innerText = localStorage.getItem('firstPlayerName') ? localStorage.getItem('firstPlayerName') : 'Player 1'
-modalTossFirstPlayer.innerText = localStorage.getItem('firstPlayerName') ? localStorage.getItem('firstPlayerName') : 'Player 1'
+function addCLick(player, openButton, radioButton) {
+    openButton.addEventListener('click', (event) => openModal(player, event))
+    openButton.innerText = localStorage.getItem(player.key) ?? player.name
+    radioButton.innerText = localStorage.getItem(player.key) ?? player.name
+}
 
-secondPlayerButton.addEventListener('click', () => openModal(secondPlayer))
-secondPlayerButton.innerText = localStorage.getItem('secondPlayerName') ? localStorage.getItem('secondPlayerName') : 'Player 2'
-modalTossSecondPlayer.innerText = localStorage.getItem('secondPlayerName') ? localStorage.getItem('secondPlayerName') : 'Player 2'
+addCLick(FIRST_PLAYER, firstPlayerButton, modalTossFirstPlayer)
+addCLick(SECOND_PLAYER, secondPlayerButton, modalTossSecondPlayer)
 
 // Событие загрузки страницы
 window.addEventListener("load", () => {
@@ -34,10 +33,10 @@ window.addEventListener("load", () => {
 })
 
 // Функция открытия модального окна
-function openModal(player) {
+function openModal(player, event) {
     activePlayer = player
     activePlayerButton = event.currentTarget
-    activePlayerKey = (player === firstPlayer) ? 'firstPlayerName' : 'secondPlayerName'
+    activePlayerKey = (player === FIRST_PLAYER) ? FIRST_PLAYER.key : SECOND_PLAYER.key
 
     modalInput.value = player.name
     modal.classList.add('active')

@@ -1,3 +1,5 @@
+import { FIRST_PLAYER, MESH_ELEMENTS, SECOND_PLAYER, WIN_POSITION } from './constans.js';
+
 const firstPlayerRadio = document.getElementById('firstPlayerRadio')
 const secondPlayerRadio = document.getElementById('secondPlayerRadio')
 
@@ -9,14 +11,13 @@ let modalToss = document.querySelector('.modal-toss')
 let firstStep = 0
 let currentPlayerIndex = firstStep
 
-firstPlayerRadio.addEventListener('click', () => {
-    currentPlayerIndex = 0                          // Установка currentPlayerIndex в 0 (индикация хода первого игрока)
+const setActivityPlayerIndex = (index) => {
+    currentPlayerIndex = index                      // Установка currentPlayerIndex в 0 (индикация хода первого игрока)
     modalToss.classList.remove('active')            // Удаление класса 'active' у элемента modalToss для его скрытия
-})
-secondPlayerRadio.addEventListener('click', () => {
-    currentPlayerIndex = 1
-    modalToss.classList.remove('active')
-})
+}
+
+firstPlayerRadio.addEventListener('click', () => setActivityPlayerIndex(0))
+secondPlayerRadio.addEventListener('click', () => setActivityPlayerIndex(1))
 
 // Функция для создания игровой доски
 export function createBoard() {
@@ -25,7 +26,7 @@ export function createBoard() {
     section.classList.add('game-block')
     ul.classList.add('game-block__list')
     
-    for (let i = 0; i < 9; i++) {
+    for (let i = 0; i < MESH_ELEMENTS; i++) {
         let li = document.createElement('li')
         li.classList.add('game-block__list-item')
         li.setAttribute('id', i)
@@ -37,30 +38,24 @@ export function createBoard() {
     document.querySelector('main').insertBefore(section, document.querySelector('.retry-block'))
 }
 
-// Функция для создания круга в указанной ячейке
-function createCircle(id) {
-    let blocks = document.querySelectorAll('.game-block__list-item')
-    let circle = document.createElement('div')
-    circle.classList.add('circle')
-    blocks[id].appendChild(circle)
-    return
-}
-
-// Функция для создания крестика в указанной ячейке
-function createCross(id) {
-    let blocks = document.querySelectorAll('.game-block__list-item')
-    let cross = document.createElement('div')
-    cross.classList.add('cross')
-    blocks[id].appendChild(cross)
-    return
+// Функция для создания фигуры в указанной ячейке
+const createShape = (shapeName, id) => {
+    const shapeClasses = {
+        'circle': 'circle',
+        'cross': 'cross'
+    }
+    const blocks = document.querySelectorAll('.game-block__list-item')
+    const shape = document.createElement('div')
+    shape.classList.add(shapeClasses[shapeName])
+    blocks[id].appendChild(shape)
 }
 
 // Функция для проверки хода и смены игрока
 function checkStep(e) {
     if (currentPlayerIndex === 0) {
-        createCircle(e.target.getAttribute('id'))
+        createShape('circle', e.target.getAttribute('id'))
     } else {
-        createCross(e.target.getAttribute('id'))
+        createShape('cross', e.target.getAttribute('id'))
     }
     currentPlayerIndex = 1 - currentPlayerIndex
     checkWinPos()
@@ -71,25 +66,19 @@ function checkWinPos() {
     let blocks = document.querySelectorAll('.game-block__list-item')
     let allCellsOccupied = true
 
-    const winPos = [
-        [0, 1, 2], [3, 4, 5], [6, 7, 8], // Горизонтальные линии
-        [0, 3, 6], [1, 4, 7], [2, 5, 8], // Вертикальные линии
-        [0, 4, 8], [2, 4, 6]             // Диагонали
-    ]
-
-    winPos.forEach(arr => {
+    WIN_POSITION.forEach(arr => {
         let circleWins = arr.every(cell => blocks[cell].firstChild?.classList.contains('circle'))
         let crossWins = arr.every(cell => blocks[cell].firstChild?.classList.contains('cross'))
 
         if (circleWins) {
             blocks.forEach(block => block.replaceWith(block.cloneNode(true)))
-            showWinner(`${localStorage.getItem('firstPlayerName') ? localStorage.getItem('firstPlayerName') : 'Player 1'}` + ' wins!')
+            showWinner(`${localStorage.getItem(FIRST_PLAYER.key) ?? 'Player 1'}` + ' wins!')
             return
         }
 
         if (crossWins) {
             blocks.forEach(block => block.replaceWith(block.cloneNode(true)))
-            showWinner(`${localStorage.getItem('secondPlayerName') ? localStorage.getItem('secondPlayerName') : 'Player 2'}` + ' wins!')
+            showWinner(`${localStorage.getItem(SECOND_PLAYER.key) ?? 'Player 2'}` + ' wins!')
             return
         }
 
