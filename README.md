@@ -1,1 +1,3 @@
-# tictactoe-red-collar
+# TicTacToe RedCollar
+
+Тестовое задание на стажировку.
